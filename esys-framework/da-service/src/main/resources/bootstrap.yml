@@ -1,0 +1,23 @@
+---
+spring:
+  application:
+    name: @application.name@
+  profiles:
+    active: development
+  cloud:
+    config:
+      uri: http://localhost:8888
+      fail-fast: false
+      label: ""
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 200MB
+      max-request-size: 215MB
+info:
+  build:
+    name: @application.name@
+    group: @project.groupId@
+    artifact: @project.artifactId@
+    version: @project.version@

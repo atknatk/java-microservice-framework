@@ -1,0 +1,58 @@
+#---
+#spring:
+#  application:
+#    name: @application.name@
+#  profiles:
+#    active: development
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      fail-fast: false
+#      label: ""
+#
+#info:
+#  build:
+#    name: @application.name@
+#    group: @project.groupId@
+#    artifact: @project.artifactId@
+#    version: @project.version@
+
+spring:
+  application:
+    name: uaa-service
+  profiles:
+    active: test
+  cloud:
+    config:
+      uri: http://admin:password@${CONFIG_SERVER_URL:test.isisbilisim.com.tr}:${CONFIG_SERVER_PORT:8888}
+      fail-fast: true
+      label: ""
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+# JavaMail Configuration
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    protocol: smtps
+    username: evervatik@gmail.com
+    password: Qw123654
+    properties:
+      mail:
+        transport:
+          protocol: smtps
+      smtps:
+        auth: true
+        starttls:
+          enable: true
+        timeout: 8000
+
+
+#debug: true

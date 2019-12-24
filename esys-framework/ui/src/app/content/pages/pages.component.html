@@ -1,0 +1,18 @@
+<!-- begin:: Page -->
+<ng-container *ngIf="selfLayout !== 'blank' ; else selfLayoutBlank">
+    <div id="wrapper">
+        <esys-header></esys-header>
+        <esys-aside-left></esys-aside-left>
+        <div id="page-wrapper" style="min-height: 1228px;">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+            <esys-footer></esys-footer>
+        </div>
+    </div>
+</ng-container>
+
+<ng-template #selfLayoutBlank>
+    <router-outlet></router-outlet>
+</ng-template>
+<!-- end:: Page -->

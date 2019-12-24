@@ -1,0 +1,55 @@
+version: '3'
+services:
+  cloud-bus-rabbitmq:
+    image: rabbitmq:3.6.6-management
+    container_name: cloud-bus-rabbitmq
+    restart: always
+    hostname: rabbit1
+    environment:
+      - RABBITMQ_DEFAULT_USER=quest
+      - RABBITMQ_DEFAULT_PASS=quest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    labels:
+      NAME: "rabbitmq1"
+    volumes:
+      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
+#  vault:
+#    image: vault
+#    container_name: vault
+#    cap_add:
+#      - IPC_LOCK
+#    environment:
+#      VAULT_DEV_ROOT_TOKEN_ID: 934f9eae-31ff-a8ef-e1ca-4bea9e07aa09
+#    ports:
+#      - 8200:8200
+  setup-vault:
+    image: vault
+    container_name: setup-vault
+    entrypoint: /bin/sh
+    volumes:
+      - './config:/config'
+    environment:
+      VAULT_ADDR: 'http://vault:8200'
+      CONFIG_DIR: '/config'
+    command: >
+      -c "
+      sleep 2;
+      /config/vault-init.sh;
+      "
+    depends_on:
+      - vault
+  zipkin-server:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    environment:
+      - STORAGE_TYPE=mem
+      # Uncomment to disable scribe
+      # - SCRIBE_ENABLED=false
+      # Uncomment to enable self-tracing
+      # - SELF_TRACING_ENABLED=true
+      # Uncomment to enable debug logging
+      # - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG
+    ports:
+      - 9411:9411

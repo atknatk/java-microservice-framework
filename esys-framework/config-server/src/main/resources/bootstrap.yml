@@ -1,0 +1,24 @@
+---
+spring:
+  application:
+    name: @application.name@
+  profiles:
+    active: development
+  security:
+    user:
+      name: ${CONFIG_SERVER_USERNAME:admin}
+      password: ${CONFIG_SERVER_PASSWORD:password}
+  cloud:
+    config:
+      server:
+        bootstrap: true
+        git:
+          uri: http://git.isisbilisim.com.tr/scm/frmw/config.git
+          username: ${CONFIG_GIT_USERNAME:config}
+          password: ${CONFIG_GIT_PASSWORD:password}
+info:
+  build:
+    name: @application.name@
+    group: @project.groupId@
+    artifact: @project.artifactId@
+    version: @project.version@

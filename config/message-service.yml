@@ -1,0 +1,6 @@
+---
+server:
+  port: ${SERVER_PORT:8030}
+  use-forward-headers: false
+  servlet:
+    context-path: /message

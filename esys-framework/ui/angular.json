@@ -1,0 +1,152 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "ui": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ui",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.app.json",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss",
+              "src/assets/theme/plugins/bower_components/toast-master/css/jquery.toast.css",
+              "src/assets/theme/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/theme/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css",
+              "src/assets/theme/css/animate.css",
+              "src/assets/theme/css/colors/default.css",
+              "src/assets/theme/select/bootstrap-select.css",
+              "src/assets/theme/css/style.css",
+              "src/assets/theme/plugins/bower_components/datatables/datatables.css",
+              "node_modules/primeng/resources/themes/nova-light/theme.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeicons/primeicons.css",
+              "node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css"
+            ],
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/moment/min/moment.min.js",
+              "src/assets/theme/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/theme/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js",
+              "src/assets/theme/js/jquery.slimscroll.js",
+              "src/assets/theme/js/waves.js",
+              "src/assets/theme/select/bootstrap-select.js",
+              "src/assets/theme/plugins/bower_components/toast-master/js/jquery.toast.js",
+              "src/assets/theme/plugins/bower_components/datatables/datatables.js",
+              "src/assets/plugins/jquery.spring-friendly.js",
+              "src/assets/plugins/ws/stompjs.js",
+              "src/assets/plugins/ws/sockjs.js"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ui:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ui:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ui:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/tsconfig.app.json",
+              "src/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ui-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "ui:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ui:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "ui"
+}

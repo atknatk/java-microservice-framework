@@ -1,0 +1,109 @@
+.main-layout{
+  margin-top: 10px;
+  padding: 10px;
+  background-color: white;
+}
+
+.font-success{
+  color: #34bfa3 !important;
+}
+
+.font-error{
+  color: #bf0008 !important;
+}
+
+
+body .ui-tree {
+  border: none !important;
+  width: 100% !important;
+}
+
+.sub-header{
+  display: inline-block;
+  padding: 7px 25px 7px 0;
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 2.55rem;
+  font-weight: 500;
+  vertical-align: middle;
+  margin: 0 15px 0 0;
+  color: #3f4047;
+}
+
+
+.language-switch-area {
+  text-align: center;
+  padding: 10px;
+  display: block;
+}
+.language-switch-area a {
+  cursor: pointer;
+  margin-right: 5px;
+}
+.language-switch-area a span {
+  display: inline-flex;
+  -ms-opacity: .5;
+  opacity: .5;
+}
+.language-switch-area a span.language-icon-current {
+  -ms-opacity: 1;
+  opacity: 1;
+}
+
+.dtr-inline {
+  &.collapsed{
+    tbody tr td:first-child{
+      width: 110px !important;
+      &:before{
+        top : 20px !important;
+      }
+    }
+  }
+}
+
+
+.m-radio, .m-checkbox {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.m-checkbox-list .m-checkbox, .m-checkbox-list .m-radio, .m-radio-list .m-checkbox, .m-radio-list .m-radio {
+  display: block;
+}
+.m-checkbox {
+  color: #575962;
+}
+
+
+.chat-box-date{
+  background-color: rgba(225, 245, 254, 0.92);
+  border-radius: 7.5px;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+  padding: 5px 12px 6px 12px;
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  margin: 0 calc(50% - 75px);
+}
+
+
+table.dataTable tr th.select-checkbox.selected::after {
+  content: "✔";
+  margin-top: -11px;
+  margin-left: -4px;
+  text-align: center;
+  text-shadow: rgb(176, 190, 217) 1px 1px, rgb(176, 190, 217) -1px -1px, rgb(176, 190, 217) 1px -1px, rgb(176, 190, 217) -1px 1px;
+}
+
+.table tr.active td {
+  color:#123456 !important;
+  font-weight: 400;
+}
+
+#log-ex-modal{
+  padding: 0 !important;
+}

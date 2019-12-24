@@ -1,0 +1,137 @@
+<div class="main-layout">
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" id="log-tab" data-toggle="tab" href="#log" role="tab" aria-controls="log"
+               aria-expanded="true"
+               aria-selected="true">İşlem Logları</a>
+        </li>
+        <li *permissionsOnly="['authority.log.view']" class="nav-item" (click)="traceInit()">
+            <a class="nav-link" id="audit-tab" data-toggle="tab" href="#audit" role="tab" aria-controls="audit"
+               aria-selected="false">Hata Logları</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane  active" id="log" role="tabpanel" aria-labelledby="log-tab">
+            <table id="log-table" class="table table-striped table-bordered dataTable" style="width:100%">
+            </table>
+        </div>
+       <div *permissionsOnly="['authority.log.view']" class="tab-pane " id="audit" role="tabpanel" aria-labelledby="audit-tab">
+            <table id="trace-table" class="table table-striped table-bordered dataTable" style="width:100%">
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" style="padding-left: 0" id="log-ex-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 100%; height: 100%; margin: 0">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Log Detay</h4>
+            </div>
+            <div class="modal-body">
+                <h3 class="form-section">Log Trace</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <pre>{{exception}}</pre>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeTraceModal()">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="log-detail-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">Log Detay</h4>
+            </div>
+            <div class="modal-body">
+                <h3 class="form-section">Kullanıcı bilgileri</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label"> Kullanıcı
+                            adı: </label>
+                            <div class="col-lg-9"><span>{{data.createdBy}}</span></div>
+                        </div>
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label"> IP
+                            adresi: </label>
+                            <div class="col-lg-9"><span>{{data.ip}}</span></div>
+                        </div>
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label">
+                            İstemci: </label>
+                            <div class="col-lg-9"><span>{{data.client}}</span></div>
+                        </div>
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label">
+                            Tarayıcı: </label>
+                            <div class="col-lg-9"><span>{{data.browser}}</span>
+                            </div>
+                        </div><!----></div>
+                </div>
+                <h3 class="form-section">İşlem bilgileri</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label">
+                            Servis: </label>
+                            <div class="col-lg-9"><span>{{data.service}}</span></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label">
+                            İşlem: </label>
+                            <div class="col-lg-9"><span>{{data.method}}</span></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label">
+                            Zaman: </label>
+                            <div class="col-lg-9"><span>{{getDate2(data.createdDate)}} - {{getDate(data.createdDate)}}</span></div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label"> Süre: </label>
+                            <div class="col-lg-9"><span>{{data.executionTime}} ms</span></div>
+                        </div>
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label">
+                            Giriş Parametreleri: </label>
+                            <div class="col-lg-9 alert m-alert m-alert--default"><pre *ngIf="data.parameter">{{data.parameter | json}}</pre>
+                            </div>
+                        </div>
+                        <div class="form-group m-form__group row"><label class="col-lg-3 col-form-label">
+                            Çıkış Parametreleri: </label>
+                            <div class="col-lg-9 alert m-alert m-alert--default"><pre *ngIf="data.returnValue">{{data.returnValue | json}}</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <h3 class="form-section">Hata durumu</h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group m-form__group row"><!----><label
+                                class="col-lg-12 col-form-label ng-star-inserted">
+                            <i *ngIf="data.success" class="fa fa-check-circle font-success"></i>
+                            <i *ngIf="!data.success" class="fa fa-check-circle font-error"></i>
+                            {{data.success ? 'Başarılı' : 'Başarısız'}}
+                        </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>

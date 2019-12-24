@@ -1,0 +1,50 @@
+# This is a comment
+# Ignore target at the top level
+/target/
+# Ignore child project's targets as well
+/*/target/
+# And any grandchildren ...
+/*/*/target/
+# Or you can do:
+target/
+# which matches 'target' in any sub folder
+*/target/**
+*/target/*
+**/target/**
+**/localrepo/*
+
+*/node_modules/**
+*/node_modules/*
+**/node_modules/**
+**/node_modules/*
+dist
+*/dist/**
+*/dist/*
+**/dist/**
+**/dist/*
+
+
+!.mvn/wrapper/maven-wrapper.jar
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/

@@ -1,0 +1,107 @@
+<script src="roles.component.ts"></script>
+<div class="row" style="margin-top: 15px">
+    <div class="col-sm-8" >
+        <h3 class="sub-header" style="border-right: 1px solid #e2e5ec;"><span style="font-weight: bold;">Roller</span></h3>
+        <span style="position: relative; top:3px"> Yetkileri gruplamak için rolleri kullanın. </span>
+    </div>
+    <div class="col-sm-4">
+        <div  style="float: right">
+            <button class="btn btn-lg btn-info"
+                    (click)="newRoleRecord()"><i class="fa fa-plus">&nbsp;&nbsp;Yeni</i></button>
+        </div>
+
+    </div>
+</div>
+<div class="main-layout">
+    <table id="role-datatable"
+           class="display table table-striped table-bordered table-hover table-checkable no-footer dtr-inline"
+           style="width:100%">
+    </table>
+</div>
+
+<div class="modal-body" id="role-modal">
+    <div class="m-section__content">
+
+
+    </div>
+</div>
+<div class="modal-footer">
+
+</div>
+
+<div class="modal fade" id="role-modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">{{editedData ? 'Rol Düzenle: ' + editedData.name : 'Yeni Role Kaydet'}}</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab"
+                                                                  data-toggle="tab">Role adı</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Yetkiler</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="home">
+                            <div class="col-xl-12">
+                                <div class="col-xl-12">
+                                    <div class="m-form__section m-form__section--first">
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">* Rol Adı:</label>
+                                            <div class="col-xl-9 col-lg-9">
+                                                <input type="text" name="name"
+                                                       [(ngModel)]="newName.name"
+                                                       class="form-control m-input" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group m-form__group row">
+                                            <label class="col-xl-3 col-lg-3 col-form-label">* Varsayılan:</label>
+                                            <div class="col-xl-9 col-lg-9">
+
+
+                                                <label class="m-checkbox m-checkbox--solid m-checkbox--brand">
+                                                    <input type="checkbox" [(ngModel)]="newName.default"
+                                                           value="default"> Yeni kullanıcılar için varsayılan olarak
+                                                    atanır
+                                                    <span></span>
+                                                </label>
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div data-dismiss="alert">
+                                            <p style="color:#333">Kendi izinlerinizde değişiklik yapıyorsanız,
+                                                değişikliklerin sizin arayüzünüzdeki etkisini görebilmek için sayfası
+                                                yenilemeniz (F5) gerekebilir!</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="profile">
+
+                            <div class="col-xl-12">
+                                <p-tree styleClass="col-xl-12" [value]="authorities" selectionMode="checkbox"
+                                        [(selection)]="selectedAuthorities"></p-tree>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Kapat</button>
+                <button type="button" class="btn btn-info" (click)="saveRole()"><i class="fa fa-save"></i>&nbsp;&nbsp;Kaydet
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

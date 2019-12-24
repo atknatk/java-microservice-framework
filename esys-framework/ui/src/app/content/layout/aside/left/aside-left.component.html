@@ -1,0 +1,69 @@
+<div class="navbar-default sidebar" role="navigation">
+    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 100%;">
+        <div class="sidebar-nav slimscrollsidebar active" style="overflow: hidden; width: auto; height: 100%;">
+            <div class="sidebar-head">
+                <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Menüler</span>
+                </h3></div>
+            <div class="user-profile">
+                <div class="dropdown user-pro-body">
+                    <div><img src="assets/theme/plugins/images/users/varun.jpg" alt="user-img" class="img-circle"></div>
+                    <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">{{userData.firstName}} {{userData.lastName}}<span
+                            id="titleName"><i class="fa fa-truck" style="margin:3px"></i>(Nakliyeci)</span> <span
+                            class="caret"></span></a>
+                    <ul class="dropdown-menu animated flipInY">
+                        <li><a href="#"><i class="ti-user"></i> Profil Bilgilerim</a></li>
+                        <li><a href="#"><i class="ti-wallet"></i> İş Emirleri</a></li>
+                        <li><a href="#"><i class="ti-email"></i> Mesajlar</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#"><i class="ti-settings"></i> Hesap Ayarları</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="index.html"><i class="fa fa-power-off"></i> Çıkış</a></li>
+                    </ul>
+                </div>
+            </div>
+            <ul class="nav in" id="side-menu">
+                <li>
+                    <a href="javascript:void(0)" routerLink="/" class="waves-effect">
+                        <i class="fa fa-home" aria-hidden="true"></i>
+                        <span class="hide-menu"> Anasayfa </span>
+                    </a>
+
+                </li>
+                <li *permissionsOnly="['authority.organization.edit','authority.organization.delete','authority.organization.new','authority.role.edit','authority.role.delete','authority.role.new','authority.user.edit','authority.user.delete','authority.user.new','authority.usergroup.edit','authority.usergroup.delete','authority.usergroup.new','authority.log.view','authority.log.ownview']">
+                    <a href="#" class="waves-effect"><i class="fa fa-bars" aria-hidden="true"></i> <span
+                        class="hide-menu">Yönetim Paneli<span class="fa arrow"></span></span></a>
+                    <ul class="nav nav-second-level collapse" aria-expanded="true" style="">
+                        <li *permissionsOnly="['authority.organization.edit','authority.organization.delete','authority.organization.new']">
+                            <a href="javascript:void(0)" routerLinkActive="active" routerLink="/admin/organizations"><i
+                                class="fa fa-sitemap"></i><span class="hide-menu">Organizasyon</span></a></li>
+                        <li *permissionsOnly="['authority.role.edit','authority.role.delete','authority.role.new']">
+                            <a href="javascript:void(0)" routerLinkActive="active" routerLink="/admin/roles"><i
+                                    class="fa fa-suitcase"></i><span class="hide-menu">Roller</span></a>
+                        </li>
+                        <li *permissionsOnly="['authority.user.edit','authority.user.delete','authority.user.new']">
+                            <a href="javascript:void(0)" routerLinkActive="active" routerLink="/admin/users"><i
+                                class="fa fa-user"></i><span class="hide-menu">Kullanıcılar</span></a></li>
+                        <li *permissionsOnly="['authority.usergroup.edit','authority.usergroup.delete','authority.usergroup.new']">
+                            <a href="javascript:void(0)" routerLinkActive="active" routerLink="/admin/usergroups"><i
+                                class="fa fa-users"></i><span class="hide-menu">Kullanıcı Grup</span></a></li>
+                        <!--<li> <a href="javascript:void(0)" routerLinkActive="active" routerLink="/admin/languages"><i class="fa fa-language"></i><span class="hide-menu">Diller</span></a> </li>-->
+                        <li *permissionsOnly="['authority.log.view','authority.log.ownview']">
+                            <a href="javascript:void(0)" routerLinkActive="active" routerLink="/admin/logs"><i
+                                class="fa fa-archive"></i><span class="hide-menu">Log</span></a></li>
+                    </ul>
+                </li>
+                <li *permissionsOnly="['authority.product.upload','authority.product.version','authority.product.export']">
+                    <a href="javascript:void(0)" routerLink="/product" class="waves-effect">
+                        <i class="fa product-hunt" aria-hidden="true"></i>
+                        <span class="hide-menu"> Ürün </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="slimScrollBar"
+             style="background: rgba(0, 0, 0, 0.3); width: 6px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 1289px;"></div>
+        <div class="slimScrollRail"
+             style="width: 6px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+    </div>
+</div>

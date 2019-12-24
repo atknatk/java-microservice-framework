@@ -1,0 +1,242 @@
+<div class="row" style="margin-top: 15px">
+    <div class="col-sm-8">
+        <h3 class="sub-header" style="border-right: 1px solid #e2e5ec;"><span style="font-weight: bold;">Ürün Listesi</span>
+        </h3>
+        <span style="position: relative; top:3px"> Depolardaki ürünlerin listesi </span>
+    </div>
+    <div class="col-sm-4">
+        <div style="float: right">
+            <button class="btn btn-lg btn-default btn-circle"
+                    style="margin-right: 10px"
+                    (click)="sendMail()"><i class="fa fa-envelope-square"></i></button>
+            <button class="btn btn-lg btn-inverse btn-circle"
+                    style="margin-right: 3px"
+                    (click)="exportXls()"><i class="fa fa-file-excel"></i></button>
+            <button class="btn btn-lg btn-inverse btn-circle"
+                    style="margin-right: 3px"
+                    (click)="exportPdf()"><i class="fa fa-file-pdf"></i></button>
+            <button class="btn btn-lg btn-inverse btn-circle"
+                    (click)="exportCsv()"><i class="fa fa-file-archive"></i></button>
+            <button class="btn btn-lg btn-info btn-circle"
+                    style="margin-left: 10px"
+                    (click)="openModal()">
+                <i class="fa fa-cog"></i></button>
+        </div>
+
+    </div>
+</div>
+
+<div style="margin-top: 10px; padding: 10px; background-color: white">
+    <div>
+        <div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Ürün Adı</th>
+                        <th>Adet</th>
+                        <th>Birim Fiyat</th>
+                        <th>Toplam Fiyat</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let product of  products">
+                        <td>{{product.name}}</td>
+                        <td>{{product.piece}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.total}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div>
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{{'ui.money.tl' | translate}}</th>
+                        <th>{{'ui.money.us' | translate}}</th>
+                        <th>{{'ui.money.euro' | translate}}</th>
+                        <th>{{'ui.money.gbp' | translate}}</th>
+                        <th>{{'ui.money.riyal' | translate}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{sumPrices.turkishPrice  | currency:'TRY'}}</td>
+                        <td *ngIf="sumPrices.dollarPrice === '***'"><a href="javascript:void(0);" (click)="requestRole('authority.price.dollar')">{{sumPrices.dollarPrice}}</a></td>
+                        <td *ngIf="sumPrices.dollarPrice !== '***'">{{sumPrices.dollarPrice | currency:'USD'}}</td>
+                        <td>{{sumPrices.gbpPrice | currency:'GBP'}}</td>
+                        <td>{{sumPrices.euroPrice | currency:'EUR'}}</td>
+                        <td>{{sumPrices.riyaPrice | currency:'SAR'}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="settings-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="width: 80%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="exampleModalLabel">{{'ui.settings' | translate}}</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Version</a>
+                        </li>
+                        <li role="presentation"><a href="#home" aria-controls="home" role="tab"
+                                                                  data-toggle="tab">Import</a></li>
+
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="profile">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th>{{'ui.report.version' | translate}}</th>
+                                    <th>{{'ui.common.createdBy' | translate}}</th>
+                                    <th>{{'ui.common.createdDate' | translate}}</th>
+                                    <th>{{'ui.common.process' | translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let version of  reportVersions">
+                                    <td><b>1.{{version.version}} {{version.current === true ? ' Current' : ''}}</b></td>
+                                    <td>{{version.createdBy}}</td>
+                                    <td>{{getDate(version.createdDate)}}</td>
+                                    <td>
+                                        <button [disabled]="version.current" class="btn btn-info" (click)="revert(version.version)">{{'ui.report.revert' | translate}}</button>
+                                        <button style="margin-left: 10px" class="btn btn-default" (click)="exportPdf(version)">{{'ui.common.show' | translate}}</button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div role="tabpanel" class="tab-pane " id="home">
+
+                            <input type="file" name="photo" ng2FileSelect [uploader]="uploader"/>
+                            <br>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th width="50%">Name</th>
+                                    <th>Size</th>
+                                    <th>Progress</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let item of uploader.queue">
+                                    <td><strong>{{ item?.file?.name }}</strong></td>
+                                    <td *ngIf="uploader.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+                                    <td *ngIf="uploader.isHTML5">
+                                        <div class="progress" style="margin-bottom: 0;">
+                                            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }"></div>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                        <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                        <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                    </td>
+                                    <td nowrap>
+                                        <button type="button" class="btn btn-success btn-xs"
+                                                (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                                            <span class="glyphicon glyphicon-upload"></span> Upload
+                                        </button>
+                                        <button type="button" class="btn btn-warning btn-xs"
+                                                (click)="item.cancel()" [disabled]="!item.isUploading">
+                                            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                        </button>
+                                        <button type="button" class="btn btn-danger btn-xs"
+                                                (click)="item.remove()">
+                                            <span class="glyphicon glyphicon-trash"></span> Remove
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="progress" style="height: 12px; border-radius: 5px;">
+                                <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                            </div>
+                            <!-- <button class="btn btn-lg btn-info btn-circle" style="margin-left: 10px"
+                                     (click)="uploader.uploadAll()"
+                                     [disabled]="!uploader.getNotUploadedItems().length">
+                                 <i class="fa fa-upload"></i></button>-->
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="password-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Şifre Onay</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group m-form__group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Şifreniz:</label>
+                    <div class="col-xl-9 col-lg-9">
+                        <input type="password" name="name"
+                               [(ngModel)]="password"
+                               class="form-control m-input" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Kapat</button>
+                <button type="button" class="btn btn-info" (click)="revertReq()"><i class="fa fa-save"></i>&nbsp;&nbsp;Gönder</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="mail-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Mail</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group m-form__group row">
+                    <label class="col-xl-3 col-lg-3 col-form-label">Mail:</label>
+                    <div class="col-xl-9 col-lg-9">
+                        <input type="email" name="name"
+                               [(ngModel)]="mail"
+                               class="form-control m-input" placeholder="">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="closeModal()">Kapat</button>
+                <button type="button" class="btn btn-info" (click)="sendMailReq()"><i class="fa fa-save"></i>&nbsp;&nbsp;Gönder</button>
+            </div>
+        </div>
+    </div>
+</div>

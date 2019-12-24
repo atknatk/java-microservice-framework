@@ -1,0 +1,56 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+  jta:
+    enabled: false
+  output:
+    ansi:
+      enabled: always
+  sleuth:
+    enabled: true
+  mvc:
+    dispatch-options-request: true
+  datasource:
+    sql-script-encoding: UTF-8
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    
+server:
+  port: 4000
+  servlet:
+    context-path: /ruleengine
+
+
+logging:
+  pattern:
+    file: "%d{${LOG_DATEFORMAT_PATTERN:dd-MM-yyyy HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p}  %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+
+info:
+  app:
+    java-version: java.version
+    version: project.version
+  
+jwt:
+  header: Auth
+  university-portal:
+      integrationKey: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbkV4cGlyeSI6MzAwMDAsImV4cGxhbmF0aW9uIjoiUnVsZUVuZ2luZSBTWVMgcGxhdGZvcm11IiwicGxhdGZvcm0iOiJTWVMifQ.BWM8qY9NYoCYs0K9iIlQ0BFkA8hBYZlI3jGAyv090rQ
+      platform: SYS
+      secret:
+        integration: 
+            sha: 339d6ca9e9fce70e88781703d6fb352d883e668f 
+            key: ruleengineSysIntegration
+        external-server: 
+            sha: d9c87a4ecf1d849996f1f6786ce4ed2b922e2517 
+            key: ruleengineSysExternalServer
+        external-client: 
+            sha: 81dc22923bd7100dfe5063df5cd177b3a49f2315 
+            key: ruleengineSysExternalClient
+        external-js-client: 
+            sha: d3486ae9136e7856bc42212385ea797094475802 
+            key: ruleengineSysJSClient        
+        token:
+          sha: 6dd9ca0f97be0bfba5386647ed09d2798914eacf
+          key: ruleengineSysToken

@@ -1,0 +1,21 @@
+---
+spring:
+  application:
+    name: @application.name@
+  profiles:
+    active: development
+  cloud:
+    config:
+      uri: http://admin:password@${CONFIG_SERVER_URL:test.isisbilisim.com.tr}:${CONFIG_SERVER_PORT:8888}
+      fail-fast: true
+      label: ""
+
+
+info:
+  build:
+    name: @application.name@
+    group: @project.groupId@
+    artifact: @project.artifactId@
+    version: @project.version@
+
+

@@ -1,0 +1,12 @@
+server:
+  port: ${PORT:4949}
+
+management:
+  port: 4950
+
+---
+spring:
+  profiles: cloud
+
+management:
+  port: -1

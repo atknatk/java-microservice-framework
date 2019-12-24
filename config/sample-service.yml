@@ -1,0 +1,6 @@
+---
+server:
+  port: ${SERVER_PORT:9010}
+sampleProp:
+  sampleNumber: 50
+  failureProbability: 0.1

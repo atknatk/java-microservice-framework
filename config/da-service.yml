@@ -1,0 +1,9 @@
+---
+server:
+  port: ${SERVER_PORT:8060}
+  use-forward-headers: false
+  servlet:
+    context-path: /documents
+
+da:
+    dummy: false

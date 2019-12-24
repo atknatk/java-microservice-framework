@@ -1,0 +1,75 @@
+
+    <div class="new-login-box">
+        <div class="">
+            <h3 class="box-title m-b-0">Dış Ticaret Portalına Hoşgeldiniz</h3>
+            <small>Lütfen kullanıcı bilgilerinizi doldurunuz.</small>
+            <form class="form-horizontal new-lg-form" (submit)="submit()">
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control"
+                               [(ngModel)]="model.firstName" #firstName="ngModel" name="firstName"
+                               type="text" required="" placeholder="ADINIZ"> </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control"
+                               [(ngModel)]="model.lastName" #lastName="ngModel" name="lastName"
+                               type="text" required="" placeholder="SOYADINIZ"> </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control"
+                               [(ngModel)]="model.email" #email="ngModel" name="email"
+                               type="mail" required="" placeholder="MAİL ADRESİNİZ"> </div>
+                </div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control"
+                               [(ngModel)]="model.password" #password="ngModel" name="password"
+                               type="password" required="" placeholder="ŞİFRENİZ"> </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control"
+                               [(ngModel)]="model.matchingPassword" #matchingPassword="ngModel" name="matchingPassword"
+                               type="password" required="" placeholder="TEKRAR ŞİFRENİZ"> </div>
+                </div>
+                <div class="form-group">
+                    <!-- to enable captcha uncomment the keys in application.properties -->
+                    <div class="col-md-12 text-center" style="    padding-left: 16%;">
+                        <ngx-recaptcha2 #captchaElem
+                                        name="capthcaKey"
+                                        [siteKey]="siteKey"
+                                        [size]="'Normal'"
+                                        [hl]="'tr'"
+                                        [theme]="'Light'"
+                                        [type]="'Image'"
+                                        (expire)="resetCaptcha()"
+                                        [(ngModel)]="capthcaKey">
+                        </ngx-recaptcha2>
+                        <!--	<div class="g-recaptcha col-sm-5" data-sitekey="6LetznUUAAAAABiHi8vU5WLTcNpMBOEoY-9G8Kk9"
+                                 data-callback="onReCaptchaSuccess" data-expired-callback="onReCaptchaExpired"></div>-->
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary p-t-0">
+                            <input id="checkbox-signup" type="checkbox">
+                            <label for="checkbox-signup"> <a href="#">Üyelik Sözleşmesi</a>'nİ Okudum ve kabul ediyorum. </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button class="btn darkGrayButton btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">KAYIT OLUN</button>
+                    </div>
+                </div>
+                <div class="form-group m-b-0">
+                    <div class="col-sm-12 text-center">
+                        <p>Zaten bir üyeliğiniz var ise <a  href="javascript:;" (click)="loginPage($event)"  class="text-danger m-l-5"><b>Giriş Yapın.</b></a></p>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>

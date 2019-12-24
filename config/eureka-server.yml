@@ -1,0 +1,19 @@
+---
+server:
+  port: ${SERVER_PORT:8761}
+eureka:
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000
+    peer-node-connection-idle-timeout-seconds: 5
+    renewal-threshold-update-interval-ms: 1000
+    peer-eureka-nodes-update-interval-ms: 1000
+    peer-eureka-status-refresh-time-interval-ms: 1000
+    wait-time-in-ms-when-sync-empty: 0
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/

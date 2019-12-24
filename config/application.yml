@@ -1,0 +1,114 @@
+---
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 2
+    leaseExpirationDurationInSeconds: 2
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${server.port}}
+      zone: primary # This is needed for the load balancer
+      profile: ${spring.profiles.active}
+      version: ${info.project.version:}
+      git-version: ${git.commit.id.describe:}
+      git-commit: ${git.commit.id.abbrev:}
+      git-branch: ${git.branch:}
+    client:
+      registeryFetchIntervalSeconds: 5
+ribbon:
+    eureka:
+        enabled: true
+#security:
+#  oauth2:
+#    client:
+#      client-id: client
+#      client-secret: secret
+#      access-token-uri: http://localhost:${SERVER_PORT:8050}/uaa/oauth/token
+#      user-authorization-uri: http://localhost:${SERVER_PORT:8050}/uaa/oauth/authorize
+#    resource:
+#      user-info-uri: http://localhost:${SERVER_PORT:8050}/uaa/user
+
+feign:
+  hystrix:
+    enabled: false
+
+spring:
+  security:
+    basic:
+      username: ${SECURITY_USER_NAME:admin}
+      password: ${SECURITY_USER_PASSWORD:password}
+  jpa:
+    hibernate:
+      ddl-auto: update
+      enable-lazy-load-no-trans: true
+      temp:
+        use-jdbc-metadata-defaults: false
+      naming:
+        physical-strategy: com.esys.framework.core.common.TableCustomNamingStrategy
+    show-sql: true
+    open-in-view: false
+    generate-ddl: false
+    properties:
+      org.hibernate.envers:
+        audit_table_suffix: _aud
+        revision_field_name: rev
+        revision_type_field_name: revtype
+        audit_strategy_validity_revend_timestamp_field_name: revend_tstmp
+        default_schema: app_audit
+  sleuth:
+    enabled: true
+  sampler:
+    percentage: 1
+  zipkin:
+    enabled: true
+    baseUrl: http://test.isisbilisim.com.tr:9411/
+  thymeleaf:
+    mode: XHTML
+
+security:
+  oauth2:
+    sso:
+      loginPath: /login
+    client:
+      accessTokenUri: http://uaa-service/uaa/oauth/token
+      userAuthorizationUri: http://uaa-service/uaa/oauth/authorize
+      clientId: clientapp
+      clientSecret: password
+      scope: webclient
+    resource:
+      userInfoUri: http://uaa-service/uaa/user/me
+      jwt:
+        keyValue: 23423fwefr3q4rf3qwf5
+      id: webclient
+      serviceId: ${PREFIX:}resource
+
+
+logging:
+  level:
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
+
+
+
+esys:
+  async:
+    corePoolSize: 5
+    maxPoolSize: 50
+    queueCapacity: 10000
+  http:
+    version: V_1_1
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+    exposed-headers: "Authorization,Link,X-Total-Count"
+    allow-credentials: true
+    max-age: 1800
+  logging:
+    logstash:
+      enabled: false
+      host: localhost
+      port: 5000
+      queue-size: 512
+  cache:
+    ehcache:
+      time-to-live-seconds: 3600
+      max-entries: 100

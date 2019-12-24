@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://85.214.232.99:5432/onektondb?user=postgres&ssl=false
+    username: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        use_sql_comments: true
+        format_sql: true
+        type: trace
+        temp:
+          use_jdbc_metadata_defaults: false
+logging:
+  level:
+    com.esys.main: TRACE
+    org.springframework.web: INFO # INFO is default but it's here to easily toggle it
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE # to show sql binded values
+  file: /u01/fmw/logs/domain_logs/bpmapi_app.log
+  pattern:
+    file: "%d %-5level [%thread] %logger : %msg%n"

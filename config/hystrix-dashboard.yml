@@ -1,0 +1,5 @@
+---
+server:
+  port: ${SERVER_PORT:7979}
+management:
+  port: ${MANAGEMENT_PORT:7980}

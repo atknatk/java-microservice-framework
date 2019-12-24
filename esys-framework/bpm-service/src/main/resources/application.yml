@@ -1,0 +1,40 @@
+spring:
+  profiles:
+    active: dev
+  jpa:
+    open-in-view: false
+  jta:
+    enabled: false
+  output:
+    ansi:
+      enabled: always
+  sleuth:
+    enabled: true
+  mvc:
+    dispatch-options-request: true
+  datasource:
+    sql-script-encoding: UTF-8
+  messages:
+    basename: messages
+    encoding: UTF-8
+  jackson:
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: false
+    
+server:
+  port: 4000
+  servlet:
+    context-path: /bpmapi
+
+
+logging:
+  pattern:
+    file: "%d{${LOG_DATEFORMAT_PATTERN:dd-MM-yyyy HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p}  %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"
+
+info:
+  app:
+    java-version: java.version
+    version: project.version
+  
+jwt:
+  header: Auth

@@ -1,0 +1,17 @@
+---
+logging:
+  level.org.springframework.cloud: DEBUG
+#spring:
+#  sleuth:
+#    enabled: false
+zipkin:
+  storage:
+    type: mem
+server:
+  port: ${SERVER_PORT:9411}
+
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false

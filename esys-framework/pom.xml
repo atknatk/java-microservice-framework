@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.0.5.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <description>ESYS Framework</description>
+
+
+    <groupId>com.esys.framework</groupId>
+    <artifactId>esys-framework</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <application.name>${project.artifactId}</application.name>
+        <hibernate.version>5.3.6.Final</hibernate.version>
+        <olingo.version>4.0.0</olingo.version>
+        <spring-cloud.version>Finchley.SR1</spring-cloud.version>
+        <jwt.version>1.0.9.RELEASE</jwt.version>
+        <oauth.version>2.3.3.RELEASE</oauth.version>
+        <zipkin.version>2.11.7</zipkin.version>
+        <sleuth.version>2.0.2.RELEASE</sleuth.version>
+        <metrics.version>3.2.6</metrics.version>
+        <resource.delimiter>@</resource.delimiter>
+        <output.directory>../dist</output.directory>
+        <tool.proguard.version>6.0.3</tool.proguard.version>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-properties-migrator</artifactId>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-sleuth</artifactId>
+                <version>${sleuth.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.jks</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+
+
+    </build>
+    <profiles>
+        <profile>
+        <id>default</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <modules>
+                <module>api-gateway</module>
+                <module>uaa-service</module>
+                <!--<module>bpm-service</module>-->
+                <!--<module>rule-engine</module>-->
+                <!--<module>da-data</module>-->
+                <!--<module>da-client</module>-->
+                <!--<module>da-service</module>-->
+                <!--<module>da-web</module>-->
+                <module>client</module>
+                <module>config-server</module>
+                <module>eureka-server</module>
+                <module>microservice-starter</module>
+                <module>message-service</module>
+                <module>base-service</module>
+                <module>organization-service</module>
+                <module>core</module>
+                <module>ui</module>
+            </modules>
+        </profile>
+        <profile>
+        <id>publish</id>
+            <modules>
+                <module>api-gateway</module>
+                <module>uaa-service</module>
+                <module>client</module>
+                <module>eureka-server</module>
+                <module>microservice-starter</module>
+                <module>message-service</module>
+                <module>base-service</module>
+                <module>organization-service</module>
+                <module>core</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>fw</id>
+            <modules>
+                <module>api-gateway</module>
+                <module>uaa-service</module>
+                <module>client</module>
+                <module>eureka-server</module>
+                <module>microservice-starter</module>
+                <module>message-service</module>
+                <module>base-service</module>
+                <module>organization-service</module>
+                <module>core</module>
+                <module>ui</module>
+            </modules>
+        </profile>
+    </profiles>
+</project>

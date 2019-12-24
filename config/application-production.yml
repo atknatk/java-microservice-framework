@@ -1,0 +1,66 @@
+eureka:
+  instance:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8761/eureka/
+
+spring:
+  datasource:
+    url: jdbc:postgresql://db.isisbilisim.com.tr:5432/frmwtest?createDatabaseIfNotExist=true
+    username: frmwtest
+    password: T8dWNnKnIb
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+  rabbitmq:
+    host: test.isisbilisim.com.tr
+    port: 5672
+    username: tavsan
+    password: 123456
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    protocol: smtps
+    username: evervatik@gmail.com
+    password: Qw123654
+    properties:
+      mail:
+        transport:
+          protocol: smtps
+      smtps:
+        auth: true
+        starttls:
+          enable: true
+        timeout: 8000
+  thymeleaf:
+    cache: true
+
+esys:
+  security:
+    client-authorization:
+      client-id: internal
+      client-secret: internal
+    authentication:
+      jwt:
+        base64-secret: bXktc2VjcmV0LWtleS13aGljaC1zaG91bGQtYmUtY2hhbmdlZC1pbi1wcm9kdWN0aW9uLWFuZC1iZS1iYXNlNjQtZW5jb2RlZAo=
+        secret: 23423fwefr3q4rf3qwf5
+        token-validity-in-seconds: 86400
+      ldap:
+        enabled: true
+        url: ldap://ldap.forumsys.com:389/
+        base-dn: dc=example,dc=com
+        username: cn=read-only-admin,dc=example,dc=com
+        password: password
+        user-dn-pattern: uid={0}
+  mail:
+    from: app@localhost
+    support: support@isisbilisim.com.tr
+  captcha:
+    google:
+      key:
+        site: 6LetznUUAAAAABiHi8vU5WLTcNpMBOEoY-9G8Kk9
+        secret: 6LetznUUAAAAAGS_3q14lKdQGJfQ4CyJ1R-LyGdf

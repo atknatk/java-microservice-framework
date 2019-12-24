@@ -1,0 +1,68 @@
+---
+spring:
+  application:
+    name: "@application.name@"
+  profiles:
+    active: development
+  cloud:
+    config:
+      uri: http://admin:password@${CONFIG_SERVER_URL:test.isisbilisim.com.tr}:${CONFIG_SERVER_PORT:8888}
+      fail-fast: true
+      label: ""
+  sleuth:
+    feign:
+      enabled: true
+      processor:
+        enabled: true
+
+info:
+  build:
+    name: "@application.name@"
+    group: "@project.groupId@"
+    artifact: "@project.artifactId@"
+    version: "@project.version@"
+
+
+
+security:
+  oauth2:
+    client:
+      client-id: acme
+      client-secret: acmesecret
+      scope: read,write
+      auto-approve-scopes: '.*'
+
+google:
+  client:
+    clientId: 429475313452-llnp7bcs54bsvi302sr711elmf5icqj7.apps.googleusercontent.com
+    clientSecret: ECP5bn9E6fLEPBOGecgqHboL
+    accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+    userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+
+
+
+#logging:
+#  file: logs/dev_app.log
+#  pattern:
+#    console: "%d %-5level %logger : %msg%n"
+#    file: "%d %-5level [%thread] %logger : %msg%n"
+#  level:
+#    org.springframework.web: DEBUG
+#    guru.springframework.controllers: DEBUG
+#    org.hibernate: DEBUG
+#---
+#spring:
+#  profiles: production
+#logging:
+#  file: logs/production_app.log
+#  pattern:
+#    file: "%d %-5level [%thread] %logger{0} : %msg%n"
+#  level:
+#    org.springframework.web: WARN
+#    guru.springframework.controllers: WARN
+#    org.hibernate: WARN

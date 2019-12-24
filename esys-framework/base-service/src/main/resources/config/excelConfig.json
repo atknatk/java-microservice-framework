@@ -1,0 +1,27 @@
+[{
+    "Product":
+    [
+      {
+        "excelHeader": "Ad",
+        "excelIndex": 0,
+        "excelColType": "String",
+        "excelValue": null,
+        "pojoAttribute": "name"
+      },
+      {
+        "excelHeader": "Adet",
+        "excelIndex": 1,
+        "excelColType": "Integer",
+        "excelValue": null,
+        "pojoAttribute": "piece"
+      },
+      {
+        "excelHeader": "Fiyat",
+        "excelIndex": 2,
+        "excelColType": "Float",
+        "excelValue": null,
+        "pojoAttribute": "price"
+      }
+    ]
+  }
+]

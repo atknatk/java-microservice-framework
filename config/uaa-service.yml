@@ -1,0 +1,42 @@
+---
+server:
+  port: ${SERVER_PORT:8050}
+  use-forward-headers: false
+  servlet:
+    context-path: /uaa
+
+#security:
+#  oauth2:
+#    resource:
+#      id: isis_framework_app
+#    client:
+#      access-token-validity-seconds: 3600
+#      refresh-token-validity-seconds: 10000
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 429475313452-llnp7bcs54bsvi302sr711elmf5icqj7.apps.googleusercontent.com
+            client-secret: ECP5bn9E6fLEPBOGecgqHboL
+          facebook:
+            client-id: <id>
+            client-secret: <secret>
+
+
+purge:
+  cron:
+    expression: 0 0 5 * * ?
+
+uaa:
+    key-store:
+        name: keystore.jks
+        password: password
+        alias: selfsigned
+    web-client-configuration:
+        access-token-validity-in-seconds: 300
+        refresh-token-validity-in-seconds-for-remember-me: 604800
+        client-id: web_app
+        secret: changeit

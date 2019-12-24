@@ -1,0 +1,11 @@
+<settings>
+    <localRepository>localrepo</localRepository>
+    <profiles>
+        <profile>
+            <id>esys-repositories</id>
+        </profile>
+    </profiles>
+    <activeProfiles>
+        <activeProfile>development</activeProfile>
+    </activeProfiles>
+</settings>

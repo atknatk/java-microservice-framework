@@ -1,0 +1,111 @@
+<div class="new-login-box">
+    <div>
+       <!-- {{loading}}-->
+        <h3 class="box-title m-b-0">Dış Ticaret Portalına Hoşgeldiniz</h3>
+        <small>Lütfen giriş bilgilerinizi doldurunuz.</small>
+        <form class="form-horizontal new-lg-form" (ngSubmit)="f.form.valid && submit()" #f="ngForm">
+
+            <div class="form-group  m-t-20">
+                <div class="col-xs-12">
+                    <label>Kullanıcı Adınız</label>
+                    <input [(ngModel)]="model.email" #email="ngModel" name="email" class="form-control" type="text"
+                           required="" placeholder="Kullanıcı Adı">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <label>ŞİFRENİZ</label>
+                    <input [(ngModel)]="model.password" #password="ngModel" name="password" class="form-control"
+                           type="password" required="" placeholder="Şifre">
+                </div>
+            </div>
+            <!--<div class="form-group">
+                <div class="col-md-12 text-center">
+                    <label> <img src="plugins/images/captachaDemo.png" /></label>
+
+                </div>
+            </div>-->
+            <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light darkGrayButton"
+                            type="submit">{{'ui.common.login' | translate}}
+                    </button>
+                    <br>
+                    <!--<div style="margin-top: 10px;"><a href="javascript:void(0)" id="to-recover"-->
+                                                      <!--class="text-dark pull-right"><i class="fa fa-lock m-r-5"></i>-->
+                        <!--Şifremi Unuttum</a></div>-->
+                </div>
+            </div>
+
+            <!--   <div class="form-group text-center m-t-20">
+                   <div class="col-xs-12">
+                       <a class="btn btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light darkGrayButton"
+                              href="api/uaa/login/google" type="submit">Google
+                       </a>
+                   </div>
+               </div>
+
+               <div class="form-group text-center m-t-20">
+                   <div class="col-xs-12">
+                       <a class="btn btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light darkGrayButton"
+                          href="api/uaa/oauth2/authorization/facebook" type="submit">Facebook
+                       </a>
+                   </div>
+               </div>-->
+
+            <!--<div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <div class="social"><a href="javascript:void(0)" class="btn  btn-facebook" data-toggle="tooltip"  title="Facebook'ta paylaşın."> <i aria-hidden="true" class="fab fa-facebook-f"></i> </a> <a href="javascript:void(0)" class="btn btn-googleplus" data-toggle="tooltip"  title="Google P"> <i aria-hidden="true" class="fab fa-google-plus-g"></i> </a> </div>
+              </div>-->
+            <div class="form-group m-b-0">
+                <div class="col-sm-12 text-center">
+                    <p>Sisteme henüz kayıtlı değil misiniz?
+                        <a href="javascript:;" (click)="register($event)" class="text-primary m-l-5"
+                           style="color : #848580"><b>KAYIT OLUNUZ.</b></a>
+                    </p>
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" id="recoverform" action="index.html">
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <h3>Şifremi Unuttum</h3>
+                    <p class="text-muted">Sistemde kayıtlı mail adresinizi giriniz. </p>
+                </div>
+            </div>
+            <div class="form-group ">
+                <div class="col-xs-12">
+                    <input class="form-control" type="text" required="" placeholder="Mail Adresiniz">
+                </div>
+            </div>
+            <div class="form-group text-center m-t-20">
+                <div class="col-xs-12">
+                    <button class="btn darkGrayButton btn-lg btn-block text-uppercase waves-effect waves-light"
+                            type="submit">GÖNDER
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="language-switch-area ">
+            <a (click)="changeLang('de')">
+                <span [class.language-icon-current]="currentLang == 'de'" title="Deutsch"><i class="famfamfam-flags de" aria-label="Deutsch"></i></span></a>
+
+            <a (click)="changeLang('en')"><span  [class.language-icon-current]="currentLang == 'en'" title="English">
+                <i class="famfamfam-flags us" aria-label="English"></i></span></a>
+
+            <a  (click)="changeLang('tr')"><span [class.language-icon-current]="currentLang == 'tr'" title="Türkçe"><i class="famfamfam-flags tr" aria-label="Türkçe"></i></span></a>
+
+            <a  (click)="changeLang('es')"><span [class.language-icon-current]="currentLang == 'es'" title="Español (Spanish)"><i class="famfamfam-flags es" aria-label="Español (Spanish)"></i></span></a>
+
+            <a  (click)="changeLang('fr')"><span [class.language-icon-current]="currentLang == 'fr'" title="Français"><i class="famfamfam-flags fr" aria-label="Français"></i></span></a>
+
+            <a  (click)="changeLang('it')"><span [class.language-icon-current]="currentLang == 'it'" title="Italiano"><i class="famfamfam-flags it" aria-label="Italiano"></i></span></a>
+
+            <a  (click)="changeLang('ru')"><span [class.language-icon-current]="currentLang == 'ru'" title="Pусский"><i class="famfamfam-flags ru" aria-label="Pусский"></i></span></a>
+
+            <a  (click)="changeLang('ar')"><span [class.language-icon-current]="currentLang == 'ar'" title="العربية"><i class="famfamfam-flags sa" aria-label="العربية"></i></span></a>
+
+            <a  (click)="changeLang('zh')"><span [class.language-icon-current]="currentLang == 'zh'" title="简体中文"><i class="famfamfam-flags cn" aria-label="简体中文"></i></span></a>
+        </div>
+    </div>
+</div>
